@@ -1,29 +1,28 @@
 import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import { createContainer } from 'meteor/react-meteor-data';
-
 import { Tasks } from '../api/tasks.js';
 
 // App component - represents the whole app
 class App extends Component {
   handleSubmit(event) {
-  event.preventDefault();
+    event.preventDefault();
 
-  // Find the text field via the React ref
-  const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
+    // Find the text field via the React ref
+    const text = ReactDOM.findDOMNode(this.refs.textInput).value.trim();
 
-  Tasks.insert({
-    text,
-    createdAt: new Date(), // current time
-  });
+    Tasks.insert({
+      text,
+      createdAt: new Date(), // current time
+    });
 
-  // Clear form
-  ReactDOM.findDOMNode(this.refs.textInput).value = '';
+    // Clear form
+    ReactDOM.findDOMNode(this.refs.textInput).value = '';
   }
 
   renderTasks() {
     return this.props.tasks.map((task) => (
-      <Task key={task._id} task={task} />
+      <Task key={task._id} task={task}/>
     ));
   }
 
